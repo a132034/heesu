@@ -20,6 +20,7 @@
 #define NUM_OF_INTERPOLATIED_IMAGE				8
 #define MAX_DISPARITY							20
 #include	"mental.h"
+#include	<string>
 
 using namespace std;
 void runStereo(char*filename_disparity_map, char*filename_left_image, char*filename_right_image, int max_disparity, bool use_post_processing);
@@ -53,7 +54,7 @@ private:
 	double****m_buf_d3, ***m_cost_vol, ***m_cost_vol_right, ***m_cost_vol_backup, ***m_cost_vol_temp;
 };
 
-INT main()
+INT main(string path)
 {
 	//variable declaration
 	register INT i, j, c, r, n;									//for loop
@@ -64,11 +65,11 @@ INT main()
 
 	//test
 	IplImage *disparity_test, *disparity_test2;
-
+	//string path = "C:\\Users\\dypark\\Desktop\\Workspace\\sgen_final\\sGen_final_0814\\heesu\\heesu\\";
 	//for image names
-	char *original_left = "view5.png";
-	char *original_mid = "view1.png";
-	char *original_right = "view5.png";
+	string original_left = path + "le.jpg";
+	string original_mid = path + "mi.jpg";
+	string original_right = path + "le.jpg";
 	char *disp_l_m = "disp_l_m.pgm";
 	char *disp_m_r = "disp_m_r.pgm";
 	char *stereo_left = "1.ppm";
@@ -78,19 +79,18 @@ INT main()
 	char *outLeft = "1.png";
 	char *outMid = "6.png";
 	char *outRight = "11.png";
-
 	//3¿Â ∑ŒµÂ 
-	if ((leftImg = cvLoadImage(original_left, CV_LOAD_IMAGE_COLOR)) == NULL)
+	if ((leftImg = cvLoadImage(original_left.c_str(), CV_LOAD_IMAGE_COLOR)) == NULL)
 	{
 		cerr << "left image is not open" << endl;
 		exit(1);
 	}
-	if ((midImg = cvLoadImage(original_mid, CV_LOAD_IMAGE_COLOR)) == NULL)
+	if ((midImg = cvLoadImage(original_mid.c_str(), CV_LOAD_IMAGE_COLOR)) == NULL)
 	{
 		cerr << "mid image is not open" << endl;
 		exit(1);
 	}
-	if ((rightImg = cvLoadImage(original_right, CV_LOAD_IMAGE_COLOR)) == NULL)
+	if ((rightImg = cvLoadImage(original_right.c_str(), CV_LOAD_IMAGE_COLOR)) == NULL)
 	{
 		cerr << "right image is not open" << endl;
 		exit(1);
